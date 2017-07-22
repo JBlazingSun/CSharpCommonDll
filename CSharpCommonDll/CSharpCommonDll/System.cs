@@ -15,14 +15,7 @@ namespace CSharpCommonDll
             try
             {
                 ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PhysicalMedia");
-                String strHardDiskId = null;
-                foreach (var o in searcher.Get())
-                {
-                    var mo = (ManagementObject) o;
-                    strHardDiskId = mo["SerialNumber"].ToString().Trim();
-                    break;
-                }
-                return strHardDiskId;
+                return (from ManagementObject mo in searcher.Get() select mo["SerialNumber"].ToString().Trim()).FirstOrDefault();
             }
             catch
             {
