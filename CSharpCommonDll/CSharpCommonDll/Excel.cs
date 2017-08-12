@@ -16,32 +16,40 @@ namespace CSharpCommonDll
     public partial class Jyh
     {
         /// <summary>
-        /// 从TXT文件导入Sqlserver生成的SQL
+        /// TXT文件导入Sqlserver
         /// </summary>
         /// <param name="txtFilePath">TXT文件路径</param>
         /// <param name="tableName">SQL表名</param>
-        /// <returns>要执行插入的SQL语句</returns>
-        public string TxtToSqlServer(string txtFilePath, string tableName)
+        /// <returns>影响行数</returns>
+        public int TxtToSqlServer(string txtFilePath, string tableName)
         {
             if (txtFilePath == "")
             {
-                return string.Empty;
+                return 0;
             }
+            int count = 0;
+            var querySql = new StringBuilder("");
             var streamReader = new StreamReader(txtFilePath, Encoding.UTF8);
             var line = string.Empty;
-            var querySql = string.Empty;
             while ((line = streamReader.ReadLine()) != null)
             {
                 var strs = line.Split('|');
-                querySql = $"INSERT INTO {tableName} VALUES (";
-                for (int i = 0; i < strs.Count(); i++)
+                querySql.Append($"INSERT INTO {tableName} VALUES (");
+                for (int i = 0; i < strs.Count() - 1; i++)
                 {
-                    querySql += "'" + strs[i] + "'";
+                    if (i == strs.Length - 2)
+                    {
+                        querySql.Append("'" + strs[i] + "'");
+                        break;
+                    }
+                    querySql.Append("'" + strs[i] + "',");
                 }
-                querySql += ")";
-                //count += db.Context.FromSql(querySql).ExecuteNonQuery();
+                querySql.Append(") ");
             }
-            return querySql;
+            string final = querySql.ToString();
+            //count += db.Context.FromSql(final).ExecuteNonQuery();
+            streamReader.Close();
+            return count;
         }
 
         /// <summary>

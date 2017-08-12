@@ -45,6 +45,7 @@
     <Compile Include="Common.cs" />
     <Compile Include="Excel.cs" />
     <Compile Include="Files.cs" />
+    <Compile Include="Network.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="System.cs" />
     <Compile Include="Win32.cs" />
