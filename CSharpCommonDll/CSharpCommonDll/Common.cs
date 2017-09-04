@@ -4,13 +4,13 @@ namespace CSharpCommonDll
 {
     public partial class Jyh
     {
-        private readonly Jyh _instance = new Jyh();
+        private static readonly Jyh _instance = new Jyh();
 
         private Jyh()
         {
         }
 
-        public Jyh GetInstance()
+        public static Jyh GetInstance()
         {
             return _instance;
         }
