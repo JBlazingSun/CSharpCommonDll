@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -136,10 +137,22 @@ namespace CSharpCommonDll
             }
             return regInfo;
         }
-
-        //public bool DeleteRegister(string mainKey, string subKey, string key, string value)
-        //{
-            
-        //}
+        /// <summary>
+        /// 删除子项和子级子项
+        /// </summary>
+        /// <param name="mainKey"></param>
+        /// <returns></returns>
+        public bool DeleteRegisterMainKeyTree(string mainKey)
+        {
+            try
+            {
+                Registry.CurrentUser.DeleteSubKeyTree(mainKey);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

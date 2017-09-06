@@ -1,7 +1,7 @@
 ﻿using CSharpCommonDll;
-using System;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
+
 
 namespace CSharpCommonDll.Tests
 {
@@ -13,18 +13,40 @@ namespace CSharpCommonDll.Tests
         private string subkey = "subkey";
         private string key = "key";
         private string value = "value";
+        private string iv = "iv";
+        private string password = "string";
         [TestMethod()]
         public void WriteRegisterTest()
         {
-            Assert.AreEqual(true, jyh.WriteRegister(mainkey, subkey,key, value));
+            Assert.AreEqual(true, jyh.WriteRegister(mainkey, subkey, key, value));
+            Assert.AreEqual(true, jyh.WriteRegister(mainkey, subkey, "aa", "bb"));
         }
 
         [TestMethod()]
         public void GetRegisterTest()
         {
             var regInfo = jyh.GetRegister(mainkey, subkey);
-            Assert.AreEqual(key,regInfo.Keys.First());
-            Assert.AreEqual(value,regInfo.Values.First());
+            Assert.AreEqual(key, regInfo.Keys.First());
+            Assert.AreEqual(value, regInfo.Values.First());
+        }
+
+        [TestMethod()]
+        public void DeleteRegisterTest()
+        {
+            Assert.AreEqual(true, jyh.DeleteRegisterMainKeyTree("mainkey"));
+        }
+
+        [TestMethod()]
+        public void DESDecryptTest()
+        {
+            var s = "nmcCyYI09j8=";
+            var deencrypt = jyh.DESDecrypt(s, password);
+        }
+
+        [TestMethod()]
+        public void DESEncryptTest()
+        {
+            var encrypt = jyh.DESEncrypt("string", password);
         }
     }
 }
