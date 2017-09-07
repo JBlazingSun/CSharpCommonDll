@@ -52,6 +52,68 @@ namespace CSharpCommonDll
         }
 
         /// <summary>
+        ///     写入txt文件, 会替换原来内容
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="textValue"></param>
+        public void WriteTxt(string filePath, string textValue)
+        {
+            var sw = new StreamWriter(filePath);
+            var value = textValue;
+            sw.Write(value);
+            sw.Close();
+        }
+
+        /// <summary>
+        ///     追加写入txt文件
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="textValue"></param>
+        public void WriteTxtAppend(string filePath, string textValue, bool isNewLine = false)
+        {
+            var sw = File.AppendText(filePath);
+            var value = textValue;
+            sw.Write(value);
+            if (isNewLine)
+                sw.Write(Environment.NewLine);
+            sw.Close();
+        }
+
+        /// <summary>
+        ///     修改txt文件
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="oldText"></param>
+        /// <param name="textValue"></param>
+        public void ModifyTxt(string filePath, string oldText, string textValue)
+        {
+            var list = ReadTxt(filePath);
+            var str = string.Join(Environment.NewLine, list.ToArray());
+            var strSp = str.Replace(oldText, textValue);
+            WriteTxt(filePath, strSp);
+        }
+
+        /// <summary>
+        ///     读取txt,返回每一行
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        public List<string> ReadTxt(string filePath)
+        {
+            var list = new List<string>();
+            var objReader = new StreamReader(filePath, Encoding.Default);
+            var sLine = "";
+            while (!objReader.EndOfStream)
+            {
+                sLine = objReader.ReadLine();
+                if (sLine != null && !sLine.Equals(""))
+                    list.Add(sLine); //+ Environment.NewLine
+            }
+            objReader.Close();
+            return list;
+        }
+
+        /// <summary>
         ///     保存文件
         /// </summary>
         /// <param name="fileFilter"></param>
@@ -95,7 +157,7 @@ namespace CSharpCommonDll
         }
 
         /// <summary>
-        /// 写入注册表
+        ///     写入注册表
         /// </summary>
         /// <param name="mainKey"></param>
         /// <param name="subKey"></param>
@@ -116,8 +178,8 @@ namespace CSharpCommonDll
                 return false;
             return true;
         }
+
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="mainKey"></param>
         /// <param name="subKey"></param>
@@ -131,14 +193,13 @@ namespace CSharpCommonDll
             {
                 var tempKey = reg.OpenSubKey(subKeyName);
                 foreach (var valueName in tempKey.GetValueNames())
-                {
                     regInfo.Add(valueName, tempKey.GetValue(valueName).ToString());
-                }
             }
             return regInfo;
         }
+
         /// <summary>
-        /// 删除子项和子级子项
+        ///     删除子项和子级子项
         /// </summary>
         /// <param name="mainKey"></param>
         /// <returns></returns>

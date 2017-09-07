@@ -1,4 +1,5 @@
-﻿using CSharpCommonDll;
+﻿using System;
+using CSharpCommonDll;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 
@@ -47,6 +48,31 @@ namespace CSharpCommonDll.Tests
         public void DESEncryptTest()
         {
             var encrypt = jyh.DESEncrypt("string", password);
+        }
+
+        [TestMethod()]
+        public void WriteTxtTest()
+        {
+            jyh.WriteTxt("C:\\blazings\\application\\pwd.txt", "test");
+        }
+
+        [TestMethod()]
+        public void WriteTxtAppendTest()
+        {
+            jyh.WriteTxtAppend("C:\\blazings\\application\\pwd.txt", "test", true);
+        }
+
+        [TestMethod()]
+        public void ModifyTxtTest()
+        {
+            jyh.ModifyTxt("C:\\blazings\\application\\pwd.txt", "Collections.", "1");
+        }
+
+        [TestMethod()]
+        public void ReadTxtTest()
+        {
+            var v = jyh.ReadTxt("C:\\blazings\\application\\pwd.txt");
+
         }
     }
 }

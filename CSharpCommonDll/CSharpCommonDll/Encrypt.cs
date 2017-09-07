@@ -13,7 +13,7 @@ namespace CSharpCommonDll
         /// <param name="password"></param>
         /// <param name="ciphertext">已加密的字串</param>
         /// <returns></returns>
-        public string DESDecrypt(string ciphertext,string password,string password2="blazings")
+        public string DESDecrypt(string ciphertext,string password,string passwordIV="blazings")
         {
             string cipher = string.Empty;
 
@@ -27,11 +27,11 @@ namespace CSharpCommonDll
                 password.CopyTo(0, key, 0, password.Length);
 
                 char[] iv = new char[8];
-                if (password2.Length > 8)
+                if (passwordIV.Length > 8)
                 {
-                    password2 = password2.Remove(8);
+                    passwordIV = passwordIV.Remove(8);
                 }
-                password2.CopyTo(0, iv, 0, password2.Length);
+                passwordIV.CopyTo(0, iv, 0, passwordIV.Length);
 
                 if (ciphertext == null)
                 {
@@ -67,9 +67,9 @@ namespace CSharpCommonDll
         /// </summary>
         /// <param name="password">自己定义</param>
         /// <param name="text">加密字串</param>
-        /// <param name="password2">自己定义</param>
+        /// <param name="passwordIV">自己定义</param>
         /// <returns></returns>
-        public string DESEncrypt(string text, string password, string password2="blazings")
+        public string DESEncrypt(string text, string password, string passwordIV="blazings")
         {
             string cipher;
             char[] key = new char[8];
@@ -80,11 +80,11 @@ namespace CSharpCommonDll
             password.CopyTo(0, key, 0, password.Length);
 
             char[] iv = new char[8];
-            if (password2.Length > 8)
+            if (passwordIV.Length > 8)
             {
-                password2 = password2.Remove(8);
+                passwordIV = passwordIV.Remove(8);
             }
-            password2.CopyTo(0, iv, 0, password2.Length);
+            passwordIV.CopyTo(0, iv, 0, passwordIV.Length);
 
             if (text == null)
             {
