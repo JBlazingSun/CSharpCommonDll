@@ -27,6 +27,8 @@ namespace CSharpCommonDll
         /// <param name="port">端口</param>
         /// <param name="user">用户名</param>
         /// <param name="pwd">密码</param>
+        /// SFTPHelper sFTPHelper = new SFTPHelper("192.168.0.153", "22", "root", "789456");
+        /// sFTPHelper.Connect();
         public SFTPHelper(string ip, string port, string user, string pwd)
         {
             sftp = new SftpClient(ip, Int32.Parse(port), user, pwd);
