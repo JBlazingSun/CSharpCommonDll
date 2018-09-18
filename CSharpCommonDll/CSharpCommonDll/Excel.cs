@@ -188,85 +188,85 @@ namespace CSharpCommonDll
                 throw e;
             }
         }
-        /// <summary>
-        /// datatable导出到excel,
-        /// </summary>
-        /// <param name="dt"></param>
-        /// <param name="sheetName"></param>
-        /// <param name="showWindowsOrSave">true代表直接显示excel,将不会保存本地文件;false代表用户必须选择保存本地文件,保存成功后会提示用户是否打开文件</param>
-        //public void DataTableToExcel(DataTable[] dt, string[] sheetName, bool showWindowsOrSave = false)
-        //{
-        //    if (dt.Length != sheetName.Length)
-        //    {
-        //        MessageBox.Show("传入的前两个参数的个数必须完全一致");
-        //        return;
-        //    }
-        //    Microsoft.Office.Interop.Excel.Application myExcel = new Microsoft.Office.Interop.Excel.Application();
-        //    myExcel.ShowWindowsInTaskbar = true;
-        //    myExcel.Visible = false;
-        //    Microsoft.Office.Interop.Excel.Workbook Xlsbook = myExcel.Workbooks.Add();
-        //    //删除多余sheet
-        //    for (int i = 1; i < Xlsbook.Sheets.Count; i++)
-        //    {
-        //        Xlsbook.Sheets[i].delete();
-        //    }
+            /// <summary>
+            /// datatable导出到excel,
+            /// </summary>
+            /// <param name="dt"></param>
+            /// <param name="sheetName"></param>
+            /// <param name="showWindowsOrSave">true代表直接显示excel,将不会保存本地文件;false代表用户必须选择保存本地文件,保存成功后会提示用户是否打开文件</param>
+            //public void DataTableToExcel(DataTable[] dt, string[] sheetName, bool showWindowsOrSave = false)
+            //{
+            //      if (dt.Length != sheetName.Length)
+            //      {
+            //            MessageBox.Show("传入的前两个参数的个数必须完全一致");
+            //            return;
+            //      }
+            //      Microsoft.Office.Interop.Excel.Application myExcel = new Microsoft.Office.Interop.Excel.Application();
+            //      myExcel.ShowWindowsInTaskbar = true;
+            //      myExcel.Visible = false;
+            //      Microsoft.Office.Interop.Excel.Workbook Xlsbook = myExcel.Workbooks.Add();
+            //      //删除多余sheet
+            //      for (int i = 1; i < Xlsbook.Sheets.Count; i++)
+            //      {
+            //            Xlsbook.Sheets[i].delete();
+            //      }
 
-        //    for (int i = 0; i < dt.Length; i++)
-        //    {
-        //        DataTable DT_This = dt[i];
-        //        string[,] dataarray = new string[DT_This.Rows.Count + 1, DT_This.Columns.Count];
-        //        Microsoft.Office.Interop.Excel.Worksheet Xlssheet = (i == 0 ? Xlsbook.Sheets[1] : Xlsbook.Sheets.Add());
-        //        Xlssheet.Name = sheetName[i];
-        //        for (int j = 0; j < DT_This.Columns.Count; j++)
-        //        {
-        //            dataarray[0, j] = DT_This.Columns[j].ColumnName;
-        //            for (int m = 0; m < DT_This.Rows.Count; m++)
-        //            {
-        //                dataarray[m + 1, j] = DT_This.Rows[m][j].ToString();
-        //            }
-        //        }
-        //        Xlssheet.Range["A1"].Resize[dataarray.GetLength(0), dataarray.GetLength(1)].Value = dataarray;
-        //    }
-        //    if (showWindowsOrSave)
-        //    {
-        //        myExcel.Visible = true;
-        //    }
-        //    else
-        //    {
-        //        string filename = SaveFile();
-        //        if (filename != "")
-        //        {
-        //            try
-        //            {
-        //                Xlsbook.SaveAs(filename);
-        //                myExcel.Quit();
-        //                //关闭excel
-        //                try
-        //                {
-        //                    if (myExcel != null)
-        //                    {
-        //                        int lpdwProcessId;
-        //                        GetWindowThreadProcessId(new IntPtr(myExcel.Hwnd), out lpdwProcessId);
-        //                        System.Diagnostics.Process.GetProcessById(lpdwProcessId).Kill();
-        //                    }
-        //                }
-        //                catch (Exception ex)
-        //                {
-        //                    //  Console.WriteLine("Delete Excel Process Error:" + ex.Message);
-        //                }
-        //                var rd = MessageBox.Show("是否打开文件", "导出成功!", MessageBoxButtons.YesNo);
-        //                if (rd == DialogResult.Yes | rd == DialogResult.OK)
-        //                {
-        //                    Process.Start(filename);
-        //                }
-        //            }
-        //            catch (Exception e)
-        //            {
-        //                MessageBox.Show(e.Message);
-        //            }
+            //      for (int i = 0; i < dt.Length; i++)
+            //      {
+            //            DataTable DT_This = dt[i];
+            //            string[,] dataarray = new string[DT_This.Rows.Count + 1, DT_This.Columns.Count];
+            //            Microsoft.Office.Interop.Excel.Worksheet Xlssheet = (i == 0 ? Xlsbook.Sheets[1] : Xlsbook.Sheets.Add());
+            //            Xlssheet.Name = sheetName[i];
+            //            for (int j = 0; j < DT_This.Columns.Count; j++)
+            //            {
+            //                  dataarray[0, j] = DT_This.Columns[j].ColumnName;
+            //                  for (int m = 0; m < DT_This.Rows.Count; m++)
+            //                  {
+            //                        dataarray[m + 1, j] = DT_This.Rows[m][j].ToString();
+            //                  }
+            //            }
+            //            Xlssheet.Range["A1"].Resize[dataarray.GetLength(0), dataarray.GetLength(1)].Value = dataarray;
+            //      }
+            //      if (showWindowsOrSave)
+            //      {
+            //            myExcel.Visible = true;
+            //      }
+            //      else
+            //      {
+            //            string filename = SaveFile();
+            //            if (filename != "")
+            //            {
+            //                  try
+            //                  {
+            //                        Xlsbook.SaveAs(filename);
+            //                        myExcel.Quit();
+            //                        //关闭excel
+            //                        try
+            //                        {
+            //                              if (myExcel != null)
+            //                              {
+            //                                    int lpdwProcessId;
+            //                                    GetWindowThreadProcessId(new IntPtr(myExcel.Hwnd), out lpdwProcessId);
+            //                                    System.Diagnostics.Process.GetProcessById(lpdwProcessId).Kill();
+            //                              }
+            //                        }
+            //                        catch (Exception ex)
+            //                        {
+            //                              //  Console.WriteLine("Delete Excel Process Error:" + ex.Message);
+            //                        }
+            //                        var rd = MessageBox.Show("是否打开文件", "导出成功!", MessageBoxButtons.YesNo);
+            //                        if (rd == DialogResult.Yes | rd == DialogResult.OK)
+            //                        {
+            //                              Process.Start(filename);
+            //                        }
+            //                  }
+            //                  catch (Exception e)
+            //                  {
+            //                        MessageBox.Show(e.Message);
+            //                  }
 
-        //        }
-        //    }
-        //}
-    }
+            //            }
+            //      }
+            //}
+      }
 }
